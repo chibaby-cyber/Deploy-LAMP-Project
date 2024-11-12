@@ -12,16 +12,19 @@ To perform this project, I must carry out the following steps
 - Enable PHP on the website
 
 ## Create a EC2 Instance
-In order to complete this project you will need an AWS account and a virtual server with Ubuntu Server OS.
+In order to complete this project I will need an AWS account and a virtual server with Ubuntu Server OS.
 
 AWS is the biggest Cloud Service Provider and it offers a free tier account that we are going to leverage for our projects.
 
-Follow the instructions below to create your EC2 instance.
+I followed the instructions below to create your EC2 instance.
 
 1. Register a new AWS account.
 2. Select your preferred region (the closest to you) and launch a new EC2 instance of t2.micro family with Ubuntu Server launch EC2
    
 IMPORTANT – save your private key (.pem file) securely and do not share it with anyone! If you lose it, you will not be able to connect to your server ever again!
+
+![Screenshot (276)](https://github.com/user-attachments/assets/284db822-55bf-4c32-b082-a1941765be80)
+
 ### Connecting to EC2 terminal
 - Move into the folder where the pair key is downloaded and run the following command to connect to the instance
 ```
@@ -29,6 +32,9 @@ IMPORTANT – save your private key (.pem file) securely and do not share it wit
       sudo chmod 0400 <private-key-name>.pem
       ssh -i <private-key-name>.pem ubuntu@<Public-IP-address>
 ```
+
+![Screenshot (277)](https://github.com/user-attachments/assets/ff935216-3ef7-4e89-948c-9ae3e76e9b1e)
+
 ## Install APACHE and Update the Firewall
 1. Install Apache using Ubuntu’s package manager ‘apt’
 ```
@@ -50,8 +56,11 @@ IMPORTANT – save your private key (.pem file) securely and do not share it wit
 ```
 4.  Open a web browser of your choice and try to access following url
 ```
-      http://<Public-IP-Address>:80
+      http://54.236.21.42:80
 ```
+![Screenshot (287)](https://github.com/user-attachments/assets/2a92b237-9d83-4d58-80d1-6867f402b126)
+
+
 ## Install MYSQL
 1. Using ‘apt’ to acquire and install this server
 ```
@@ -75,6 +84,8 @@ Note: Enabling this feature is something of a judgment call. If enabled, passwor
 
 Answer Y for yes, or anything else to continue without enabling.
 
+![Screenshot (290) 1](https://github.com/user-attachments/assets/9ad19333-cb0f-439e-a16a-daedfac0eb68)
+
 ## Install PHP
 1. I will install the php package, in addition to the php package, I’ll need php-mysql, a PHP module that allows PHP to communicate with MySQL-based databases and also libapache2-mod-php to enable Apache to handle PHP files
 ```
@@ -84,6 +95,9 @@ Answer Y for yes, or anything else to continue without enabling.
 ```
       php -v
 ```
+
+![Screenshot (298)](https://github.com/user-attachments/assets/84394fc8-eea4-48db-876e-e35984480368)
+
 ## Create Virtual Host Using APACHE
 1. Create the directory for projectlamp using ‘mkdir’ command as follows:
 ```
@@ -108,15 +122,15 @@ Answer Y for yes, or anything else to continue without enabling.
       CustomLog ${APACHE_LOG_DIR}/access.log combined
       </VirtualHost>
 ```
-5. You can now use a2ensite command to enable the new virtual host:
+5. I used a2ensite command to enable the new virtual host:
 ```
       sudo a2ensite projectlamp
 ```
-6. You can disable Apache default website using the command
+6. I disabled Apache default website using the command
 ```
       sudo a2dissite 000-default
 ```
-7. To make sure your configuration file doesn’t contain syntax errors, run:
+7. To make sure my configuration file doesn’t contain syntax errors, run:
 ```
       sudo apache2ctl configtest
 ```
@@ -124,9 +138,9 @@ Answer Y for yes, or anything else to continue without enabling.
 ```
       sudo systemctl reload apache2
 ```
-9. Now go to your browser and try to open your website URL using IP address:
+9. Now go to the browser and try to open the website URL using IP address:
 ```
-      http://<Public-IP-Address>:80
+      http://54.236.21.42:80
 ```
 ## Enable PHP on the website
 1. Edit the conf file with the command
@@ -138,11 +152,11 @@ Answer Y for yes, or anything else to continue without enabling.
     #To this:
         DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
 
-3. After saving and closing the file, you will need to reload Apache so the changes take effect:
+3. After saving and closing the file, I will need to reload Apache so the changes take effect:
 ```
       sudo systemctl reload apache2
 ```
-4. Create a new file named index.php inside your custom web root folder:
+4. Create a new file named index.php inside my custom web root folder:
 ```
       vim /var/www/projectlamp/index.php
 ```
@@ -151,7 +165,9 @@ Answer Y for yes, or anything else to continue without enabling.
       <?php
       phpinfo();
 ```
-6. When you are finished, save and close the file, refresh the page and you will see a page similar to this:
+6. When I am finished, save and close the file, refresh the page and I will see a page similar to this:
+
+![Screenshot (307)](https://github.com/user-attachments/assets/6e71d98d-9203-4ff8-8abd-f037280cedc2)
 
 7.After checking the relevant information about your PHP server through that page, it’s best to remove the file you created as it contains sensitive information about your PHP environment -and your Ubuntu server. You can use rm to do so:
 ```
